@@ -1,0 +1,54 @@
+iRiver H300 Goodies
+
+I own an iRiver H320 and use a Linux environment almost exclusively, so I wanted to write up some scripts that would make handling my music collection relatively easily. And since these scripts work great for me on multiple operating systems (Ubuntu and Gentoo Linux), I figured I'd share them with everyone else at my site.
+
+
+Licensing and Legal Restrictions
+
+What license? Bah ... copy the scripts around, modify them to your heart's content and re-release them, I don't care. Please give credit in your alternate works if you release them, and maybe link to iandouglas.com on your download page so people know that I was the original author. 
+ 
+Legally, just to cover my own butt, I cannot assume any responsibility for your use or misuse of these scripts. If you use them, you accept full responsibility for your actions.
+
+ 
+Support Options
+ 
+If you need assistance with these scripts, including running them on Windows, feel free to register at iandouglas.com and either post a message, or contact me at ian.douglas@iandouglas.com or iandouglas736@gmail.com
+
+ 
+My Setup (or: Why Your Mileage May Vary)
+ 
+I generally mount my H300 as /music on my system. On the H300, I have three folders, music, playlists, recording. This gives me full paths of:
+ 
+/music/music/
+(my audio files go here with folders for each artist, with subfolders for each album I have tracks for)
+ 
+/music/playlists/
+(this is where my m3u files go, and where I also store my 'goodies' scripts)
+ 
+/music/recording/
+(this is where my H320 puts audio files I record through the microphone or line-in)
+ 
+Since your environment will be very different from my own, it's very likely that these scripts will need some basic alteration.
+ 
+ 
+Here's a description of what's included in this Goodies package:
+ 
+backup_playlist.pl
+This script is handy for copying all files from a playlist to an alternate directory. I wrote this so I could quickly copy files for a genre playlist to a different machine. Say, for example, I want to copy my classical music files to my workstation at the office, I can just run it like this:
+backup_playlist.pl /music/playlists/classical.m3u /home/id/music
+ 
+cleanm3u.sh
+This is handy if my audio software generates a playlist which includes the mount directory of /music/ … All entries in the playlist end up starting with /music/music/ and since the H300 only needs to see the base /music folder, I use the cleanm3u.sh script to call sed to strip /music/music to just /music
+ 
+genrem3u.pl
+genrem3u.readme
+(PLEASE read the readme files!)
+The 'genrem3u' script will scan the current directory (and everything in subfolders underneath it), extract their genre ID3 tag, and build filelists, which it then passes to 'mkm3u.pl' to actually build the M3U playlists.
+ 
+longname.pl
+The H300 series firmware (or Windows-based software, I forget) had a bug at one point, and I don't know if it's been fixed, where it  wouldn't handle audio files where the actual filename was longer than something weird like 52 bytes. Because at the time, some of my files weren't playing, I wrote up this little script to scan my folders to find offending files. Now that I think about it, I believe it was the Windows-based database scanner software that ships with the H300 series, which is half the reason I wrote the mkm3u/genrem3u scripts in the first place. (The other half of the reason was because the Windows based software didn't handle OGG files).
+ 
+To use it, just run the script as-is; by default it will scan the current directory for files over 52 characters long. If you want to pass a different length or path to start, run it as:
+longname.pl length /path/to/start
+like this:
+longname.pl 75 /music/music/

@@ -1,0 +1,34 @@
+genrem3u.pl, written by Ian Douglas, iandouglas.com
+
+Usage: ./genrem3u.pl [options] /path/to/starting/directory/
+
+Options:
+--help - shows usage information
+--overwrite - tells mkm3u to overwrite existing playlists if found
+--verbose - plenty of debug output
+--genre - if you want a specific genre only, it will build just that 
+          genre, used like --genre=Rock
+--random - randomize the files in the playlist, instead of in the order
+          they are found on the disk
+
+Requirements:
+- This script calls 'mkm3u' included in the package. Symlink mkm3u.pl 
+as mkm3u in your local bin folder.
+
+- mkm3u.pl requires 'audiotag' by 'Ryan' at tempestgames.com/ryan/
+
+This script uses audiotag to extract the 'genre' ID3 tag from your MP3/OGG
+files, and then passes the list of filenames to mkm3u with predefined flags
+to build playlists based solely on genre.
+
+Be sure to read through the mkm3u.readme as well, and contact me at 
+ian.douglas@iandouglas.com or through the mantis bug tracker or support 
+forums at www.iandouglas.com
+
+If you're wondering what the triple-brackets are for in the script, I use
+vim for all of my development work, and the triple bracket markers let me
+collapse sections of code. When you run vim, type this:
+	:set fdm=marker fdr=[[[,]]]
+This will collapse areas of the script into sections - VERY handy feature.
+
+

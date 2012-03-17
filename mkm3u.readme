@@ -1,0 +1,66 @@
+mkm3u.pl written by Ian Douglas, iandouglas.com
+
+Usage: ./mkm3u.pl --playlist=MyFile [other options] (--stdin or file/dir list)
+(generates MyFile.m3u)
+
+--help - draws this help usage
+--playlist=MyPlayList - mandatory field, can include .m3u extension or not
+--quietmode - supresses all output except errors
+--verbose - outputs a LOT of debug information as it works
+--overwrite - tells mkm3u to overwrite playlists with the same name if
+if they already exist
+--randomize - randomly sorts the list of files passed when building the
+playlist file; without it, the playlist is built with the
+exact order of the files passed
+--stdin - required if no file/directory list is given
+file list and/or directory list is mandatory if --stdin is not used
+
+example:
+mkm3u.pl --playlist=Canadian.m3u Amanda\ Marshall/* Avril\ Lavigne/*
+
+example:
+(some process that generates a list of filenames) | \
+	mkm3u.pl --playlist=MyPlayList --stdin
+
+example:
+mkm3u.pl --playlist=Rock.m3u --randomize RockSongs/*.mp3
+
+
+how *I* use it:
+		cd /music <-- where my H320 is mounted on my linux box
+		cd music <-- where my music files actually live
+		/usr/local/bin/mkm3u Canadian Avril\ Lagine/* Amanda\ Marshall/*
+
+NOTE: the playlist file should not include the .m3u extension - I add
+that for you
+
+This script actually lives inside my $M3UPATH and is symlinked to 
+/usr/local/bin/mkm3u
+
+You can list the files manually, or use Unix wildcards
+
+DISCLAIMER: This script has workd great for me in my environments 
+(Gentoo, 2.6 kernel, Bash v2.05b)
+(Ubuntu 6.06, 2.6 kernel, bash 3.1.17(1)-release)
+Your mileage may vary (and likely will).
+I accept and assume ABSOLUTELY ZERO responsibility if this script 
+causes any damage or undesired effect. If it works for you too, great.
+If not, learn shell scripting and tweak the script until it *does* work 
+for you, then share it with others.
+
+LICENSING: copy this around, modify it, call it your own, I don't care.
+Information should be free, and people should share their ideas to make
+the world a better place. I'd appreciate credit for the ideas in here
+though.
+
+If you're wondering what the triple-brackets are for in the script, I use
+vim for all of my development work, and the triple bracket markers let me
+collapse sections of code. When you run vim, type this:
+	:set fdm=marker fdr=[[[,]]]
+This will collapse areas of the script into sections - VERY handy feature.
+
+Requirements:
+audiotag v0.13, found at http://freshmeat.net/projects/audiotag/
+- copy the 'audiotag' perl script into your /usr/local/bin (or 
+other local 'bin' path, and you'll be all set.
+
